@@ -1,6 +1,6 @@
 from argparse import ArgumentParser, Namespace
 
-from datasets import Dataset
+from datasets import Dataset, DatasetDict
 
 
 class Loader:
@@ -16,7 +16,12 @@ class Loader:
             self.dataset = self.dataset[self.hparams.split]
 
         if self.hparams.shard is not None:
-            self.dataset = self.dataset.shard(self.hparams.shard, 0, contiguous=False)
+            if isinstance(self.dataset, DatasetDict):
+                self.dataset = DatasetDict({
+                    k: d.shard(self.hparams.shard, 0, contiguous=False) for k, d in self.dataset.items()
+                })
+            else:
+                self.dataset = self.dataset.shard(self.hparams.shard, 0, contiguous=False)
 
         return self.dataset
 
