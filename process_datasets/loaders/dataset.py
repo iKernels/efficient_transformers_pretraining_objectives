@@ -26,8 +26,7 @@ class DatasetLoader(Loader):
         )
 
         logging.info(f"Loading input dataset {hparams.name} with config {hparams.config}")
-        dataset = datasets.load_dataset(hparams.name, hparams.config, keep_in_memory=hparams.keep_in_memory)
-        self.dataset = dataset if hparams.split is None else dataset[hparams.split]
+        self.dataset = datasets.load_dataset(hparams.name, hparams.config, keep_in_memory=hparams.keep_in_memory)
 
     def add_loader_specific_args(parser: ArgumentParser):
         super(DatasetLoader, DatasetLoader).add_loader_specific_args(parser)

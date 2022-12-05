@@ -15,8 +15,7 @@ class DiskLoader(Loader):
         assert os.path.isdir(hparams.input_folder), "Input folder does not exist"
 
         logging.info("Loading input dataset from disk")
-        dataset = datasets.load_from_disk(hparams.input_folder, keep_in_memory=hparams.keep_in_memory)
-        self.dataset = dataset if hparams.split is None else dataset[hparams.split]
+        self.dataset = datasets.load_from_disk(hparams.input_folder, keep_in_memory=hparams.keep_in_memory)
 
     def add_loader_specific_args(parser: ArgumentParser):
         super(DiskLoader, DiskLoader).add_loader_specific_args(parser)

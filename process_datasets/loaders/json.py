@@ -20,10 +20,9 @@ class JsonLoader(Loader):
             for f in os.listdir(hparams.input_folder)
             if f.endswith('.json') or f.endswith('.jsonl')
         ]
-        dataset = load_dataset(
+        self.dataset = load_dataset(
             'json', data_files=filepaths, keep_in_memory=hparams.keep_in_memory
         )
-        self.dataset = dataset if hparams.split is None else dataset[hparams.split]
 
     def add_loader_specific_args(parser: ArgumentParser):
         super(JsonLoader, JsonLoader).add_loader_specific_args(parser)
