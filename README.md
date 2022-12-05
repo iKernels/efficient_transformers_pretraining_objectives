@@ -215,6 +215,7 @@ python -m transformers_framework \
     \
     --log_every_n_steps 1000 \
     --probability 0.15 \
+    --td_weight 50 \
     --beta 2.0 \
     --clusters_filename clusters/cluster_bert_base_uncased_100.txt
 ```

@@ -8,8 +8,8 @@ from transformers_framework.pipelines.rtd.base import BaseModelRTD
 from transformers_framework.utilities.interfaces import TokenDetectionStepOutput
 from transformers_framework.architectures.modeling_outputs import TokenDetectionOutput
 from transformers_framework.utilities.models import read_clusters
-from transformers_lightning.language_modeling import IGNORE_IDX
-from transformers_framework.utilities.functional import index_multi_tensors, multi_get_from_dict
+from transformers_framework.utilities.functional import multi_get_from_dict
+
 
 class BaseModelCRTD(BaseModelRTD):
     r"""
