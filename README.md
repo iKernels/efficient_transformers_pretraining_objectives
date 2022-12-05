@@ -106,7 +106,7 @@ If you provide only a `--pre_trained_model`, then `--pre_trained_config` and `--
 
 ## Pre-Training
 
-Pre-Train `BERT-base-uncased` of the paper with the following scripts. You may need to change `--devices`, `--accelerator`, `--train_batch_size` and `--accumulate_grad_batches` based on your machine.
+Pre-Train `BERT-base-uncased` of the paper with the following scripts. You may need to change `--devices`, `--accelerator`, `--train_batch_size` and `--accumulate_grad_batches` based on your machine. Pre-Trained models will be available in the output folder, under the `pre_trained_models` directory.
 
 **Masked Language Modeling**
 
@@ -196,8 +196,8 @@ python -m transformers_framework \
     --name bert-base-uncased-crts \
     --output_dir outputs/pretraining \
     \
-    --train_batch_size 16 \
-    --train_filepath data/bookcorpusopen_wikipedia_pretraining_512 \
+    --train_batch_size 32 \
+    --train_filepath data/wikipedia_bookcorpusopen_pretraining_512 \
     --train_split train \
     --post_processors parser tokenizer random_token_detection \
     --data_columns text \
@@ -333,6 +333,12 @@ python -m transformers_framework \
 ```
 
 
+### GLUE
+
+For the fine-tuning on the GLUE tasks, we used the script released by [HuggingFace](https://github.com/huggingface/transformers/tree/main/examples/pytorch/text-classification).
+
+
+
 ## (Advanced) General CLI arguments
 
 All the arguments of `pytorch-lightning` trainer are integrated in this framework. So if you want for example to train over 8 GPUs in `fp16` with `deepspeed`, just pass the followings:
@@ -378,6 +384,7 @@ The dataset used for pre-training and fine-tuning are already compatible with th
 The loaded dataset(s) will be subject to two processing steps: one before the training (which allows also to split examples in many others or to do filtering) and one while training (for preparation of examples like tokenization). The first step is called `pre_processing` while the second is called `post_processing`.
 
 Pre-processors and post-processors are classes that have a `__call__` method. No pre-processors are defined yet. You can create your own if necessary. Regarding post-processors, we made available classes for advanced tokenization and other simple tasks. You can add your custom pre- or post-processor in the folder `transformers_framework/processing`.
+
 
 #### Tokenization
 
