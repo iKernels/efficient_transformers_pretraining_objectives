@@ -12,7 +12,7 @@ class Loader:
 
     def __call__(self) -> Dataset:
         r""" Return dataset for input data. """
-        if self.hparams.split is None:
+        if self.hparams.split is not None:
             self.dataset = self.dataset[self.hparams.split]
 
         if self.hparams.shard is not None:
